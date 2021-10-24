@@ -1,0 +1,47 @@
+.switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  border-radius: 100px;
+  background-color: var(--gray);
+  padding: 1px;
+  font-size: 12px;
+}
+
+.blob {
+  position: absolute;
+  left: 0px;
+  height: 100%;
+  min-width: 50px;
+  padding: 0 5px;
+  border-radius: 100px;
+  color: transparent;
+  z-index: 1;
+  background-color: var(--green);
+  transform: translateX(0);
+  transition: all 0.4s ease-out;
+}
+
+.blob.blobRight {
+  left: calc(100%);
+  transform: translateX(-100%);
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-width: 50px;
+  padding: 0 5px;
+  color: var(--black);
+  z-index: 2;
+  transition: color 0.4s ease-out;
+  cursor: pointer;
+  user-select: none;
+}
+
+.option.active {
+  color: var(--yellow);
+}
