@@ -1,6 +1,5 @@
 import React from "react";
 import Form from "../components/form";
-import logo from "../assets/logo.png";
 import styles from "./View.module.css";
 
 function View() {
