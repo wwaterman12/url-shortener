@@ -1,5 +1,5 @@
 .form {
-  margin: auto;
+  max-width: 400px;
 }
 
 .inputWrapper {
@@ -16,8 +16,7 @@
 
 input.input {
   margin: 10px 0 5px;
-  width: 90%;
-  max-width: 400px;
+  width: 94%;
   cursor: text;
   padding: 6px 10px;
   border: 1px solid var(--green);
@@ -53,6 +52,7 @@ input.active:not(:focus):invalid + span.errorMessage {
 }
 
 .button {
+  min-width: 140px;
   padding: 16px;
   background: var(--black);
   border-radius: 40px;
@@ -60,8 +60,26 @@ input.active:not(:focus):invalid + span.errorMessage {
   color: var(--green);
   transition: background-color 0.5s;
   cursor: pointer;
+  font-weight: bold;
+}
+
+.buttonWrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.button.currentUrl {
+  background: var(--black);
+  color: var(--green);
+}
+
+.button.submit {
+  background: var(--green);
+  color: var(--black);
 }
 
 .button:hover {
-  background: var(--gray);
+  background: var(--yellow);
+  color: var(--green);
 }

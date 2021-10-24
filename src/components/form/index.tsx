@@ -11,6 +11,10 @@ function Form() {
   const [slug, setSlug] = useState("");
   const dispatch = useDispatch();
 
+  const autoFillCurrentPageUrl = (e: FormEvent) => {
+    e.preventDefault();
+    setUrl(window.location.href);
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -59,13 +63,23 @@ function Form() {
           numbers
         </span>
       </label>
-      <button
-        type="submit"
-        aria-label="Get shortened URL"
-        className={styles.button}
-      >
-        Get Shortened URL
-      </button>
+      <div className={styles.buttonWrapper}>
+        <button
+          type="button"
+          aria-label="use current page URL"
+          className={`${styles.button} ${styles.currentUrl}`}
+          onClick={autoFillCurrentPageUrl}
+        >
+          Use current URL
+        </button>
+        <button
+          type="submit"
+          aria-label="Get shortened URL"
+          className={`${styles.button} ${styles.submit}`}
+        >
+          Go
+        </button>
+      </div>
     </form>
   );
 }
