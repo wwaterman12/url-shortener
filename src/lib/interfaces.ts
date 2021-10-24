@@ -4,7 +4,7 @@ export interface PostParams {
 }
 
 export interface PostResponse {
-  url: string;
+  fullUrl: string;
   shortUrl: string;
   slug: string;
 }

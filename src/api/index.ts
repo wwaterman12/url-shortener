@@ -15,7 +15,7 @@ const postNewLink = async ({
     body: JSON.stringify({ url, slug }),
   });
   const data = await response.json();
-  return { url: data.url, shortUrl: data.short_url, slug: data.slug };
+  return { fullUrl: data.url, shortUrl: data.short_url, slug: data.slug };
 };
 
 const API = { postNewLink };
