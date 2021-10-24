@@ -1,30 +1,38 @@
 import React, { FormEvent, useState } from "react";
+import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
+import API from "../../api";
 import styles from "./Form.module.css";
 
 function Form() {
-  const [urlValue, setUrlValue] = useState("");
-  const [slugValue, setSlugValue] = useState("");
+  const [url, setUrl] = useState("");
+  const [slug, setSlug] = useState("");
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log({ urlValue, slugValue });
+    const params: PostParams = { url };
+    // only set slug param if valid, API doesn't accept empty string
+    if (slug) {
+      params.slug = slug;
+    }
+    const response = await API.postNewLink({ url, slug });
+    console.log(response);
   };
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.inputWrapper}>
         <span>Enter a URL</span>
         <input
-          className={`${styles.input} ${urlValue ? styles.active : ""}`}
+          className={`${styles.input} ${url ? styles.active : ""}`}
           type="url"
           name="url"
           id="url"
-          value={urlValue}
+          value={url}
           placeholder="https://example.com"
           pattern="https://.*"
           size={30}
           required
-          onChange={(e) => setUrlValue(e.target.value)}
+          onChange={(e) => setUrl(e.target.value)}
         />
         <span className={styles.errorMessage}>
           <img src={alert} alt="alert" /> Must be a valid URL with https://
@@ -33,14 +41,14 @@ function Form() {
       <label className={styles.inputWrapper}>
         <span>{`Enter a custom slug\n(optional)`}</span>
         <input
-          className={`${styles.input} ${slugValue ? styles.active : ""}`}
+          className={`${styles.input} ${slug ? styles.active : ""}`}
           type="text"
           name="slug"
           id="slug"
-          value={slugValue}
+          value={slug}
           placeholder="vbfsa2"
           pattern="[A-Za-z0-9]+"
-          onChange={(e) => setSlugValue(e.target.value)}
+          onChange={(e) => setSlug(e.target.value)}
         />
         <span className={styles.errorMessage}>
           <img src={alert} alt="alert" /> Slugs may only contain letters and
