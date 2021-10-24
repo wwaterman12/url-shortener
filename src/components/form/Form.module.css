@@ -4,7 +4,7 @@
 
 .inputWrapper {
   min-height: 80px;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -17,13 +17,14 @@
 input.input {
   margin: 10px 0 5px;
   width: 90%;
+  max-width: 400px;
   cursor: text;
   padding: 6px 10px;
-  border: 1px solid transparent;
+  border: 1px solid var(--green);
   border-radius: 40px;
-  background: var(--light-gray);
-  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-  color: var(--black);
+  background: var(--black);
+  transition: border-color var(--cubic-transition);
+  color: var(--green);
 }
 
 .errorMessage {
@@ -40,7 +41,6 @@ input.input {
 
 input.input:focus {
   outline: none;
-  border-color: var(--black);
 }
 
 input.active:not(:focus):invalid {
@@ -50,4 +50,18 @@ input.active:not(:focus):invalid {
 
 input.active:not(:focus):invalid + span.errorMessage {
   display: block;
+}
+
+.button {
+  padding: 16px;
+  background: var(--black);
+  border-radius: 40px;
+  border: 1px solid var(--green);
+  color: var(--green);
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--gray);
 }

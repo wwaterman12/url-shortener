@@ -47,7 +47,11 @@ function Form() {
           numbers
         </span>
       </label>
-      <button type="submit" aria-label="Get shortened URL">
+      <button
+        type="submit"
+        aria-label="Get shortened URL"
+        className={styles.button}
+      >
         Get Shortened URL
       </button>
     </form>

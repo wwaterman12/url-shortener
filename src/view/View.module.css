@@ -1,5 +1,13 @@
 .view {
   margin: auto;
-  max-width: 90vw;
   height: 100vh;
+  padding: 20px;
+  background: var(--black);
+  color: var(--green);
+}
+
+.logo {
+  padding: 10px;
+  border: 1px solid var(--green);
+  border-radius: 8px;
 }
