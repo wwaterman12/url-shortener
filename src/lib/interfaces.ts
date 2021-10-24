@@ -3,7 +3,7 @@ export interface PostParams {
   slug?: string;
 }
 
-export interface PostResponse {
+export interface ShortenedUrl {
   fullUrl: string;
   shortUrl: string;
   slug: string;

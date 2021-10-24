@@ -1,10 +1,7 @@
 import { API_URL } from "../lib/constants";
-import { PostParams, PostResponse } from "../lib/interfaces";
+import { PostParams, ShortenedUrl } from "../lib/interfaces";
 
-const postNewLink = async ({
-  url,
-  slug,
-}: PostParams): Promise<PostResponse> => {
+const postNewUrl = async ({ url, slug }: PostParams): Promise<ShortenedUrl> => {
   const response = await fetch(API_URL, {
     method: "POST",
     mode: "cors",
@@ -18,5 +15,5 @@ const postNewLink = async ({
   return { fullUrl: data.url, shortUrl: data.short_url, slug: data.slug };
 };
 
-const API = { postNewLink };
+const API = { postNewUrl };
 export default API;

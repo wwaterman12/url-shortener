@@ -18,11 +18,11 @@ const initialState: LatestUrlState = {
   status: "idle",
 };
 
-export const postNewLink = createAsyncThunk(
-  "counter/fetchCount",
+export const postNewUrl = createAsyncThunk(
+  "latestUrl/postNewUrl",
   async (postParams: PostParams, { rejectWithValue }) => {
     const response = await Promise.all([
-      API.postNewLink(postParams),
+      API.postNewUrl(postParams),
       delay(2000),
     ]);
     return response[0];
@@ -35,10 +35,10 @@ export const latestUrlSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(postNewLink.pending, (state) => {
+      .addCase(postNewUrl.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(postNewLink.fulfilled, (state, action) => {
+      .addCase(postNewUrl.fulfilled, (state, action) => {
         const { shortUrl, fullUrl, slug } = action.payload;
         state.status = "idle";
         state.shortUrl = shortUrl;

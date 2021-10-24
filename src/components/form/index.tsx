@@ -1,6 +1,6 @@
 import React, { FormEvent, useState } from "react";
 import { useDispatch } from "../../store/hooks";
-import { postNewLink } from "../../store/slices/latestUrl";
+import { postNewUrl } from "../../store/slices/latestUrl";
 import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
 import styles from "./Form.module.css";
@@ -22,7 +22,7 @@ function Form() {
     if (slug) {
       params.slug = slug;
     }
-    dispatch(postNewLink(params));
+    dispatch(postNewUrl(params));
   };
 
   return (
