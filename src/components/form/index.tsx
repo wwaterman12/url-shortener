@@ -1,12 +1,15 @@
 import React, { FormEvent, useState } from "react";
+import { useDispatch } from "../../store/hooks";
+import { postNewLink } from "../../store/slices/latestUrl";
 import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
-import API from "../../api";
 import styles from "./Form.module.css";
 
 function Form() {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
+  const dispatch = useDispatch();
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -15,9 +18,9 @@ function Form() {
     if (slug) {
       params.slug = slug;
     }
-    const response = await API.postNewLink({ url, slug });
-    console.log(response);
+    dispatch(postNewLink(params));
   };
+
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label className={styles.inputWrapper}>
