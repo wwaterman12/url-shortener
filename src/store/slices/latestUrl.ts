@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { PostParams } from "../../lib/interfaces";
+import { delay } from "../../lib/utils";
 import API from "../../api";
 
 export interface LatestUrlState {
@@ -19,9 +20,12 @@ const initialState: LatestUrlState = {
 
 export const postNewLink = createAsyncThunk(
   "counter/fetchCount",
-  async (postParams: PostParams) => {
-    const response = await API.postNewLink(postParams);
-    return response;
+  async (postParams: PostParams, { rejectWithValue }) => {
+    const response = await Promise.all([
+      API.postNewLink(postParams),
+      delay(2000),
+    ]);
+    return response[0];
   }
 );
 

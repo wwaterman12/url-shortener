@@ -3,7 +3,6 @@ import { useDispatch } from "../../store/hooks";
 import { postNewLink } from "../../store/slices/latestUrl";
 import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
-import { delay } from "../../lib/utils";
 import styles from "./Form.module.css";
 
 function Form() {
@@ -23,7 +22,7 @@ function Form() {
     if (slug) {
       params.slug = slug;
     }
-    await Promise.all([dispatch(postNewLink(params)), delay(2000)]);
+    dispatch(postNewLink(params));
   };
 
   return (
