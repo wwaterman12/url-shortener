@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { store } from "../app/store";
+import { store } from "../store";
 import View from "./index";
 
 test("renders title correctly", () => {
