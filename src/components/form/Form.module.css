@@ -3,7 +3,7 @@
 }
 
 .inputWrapper {
-  min-height: 80px;
+  min-height: 100px;
   margin-bottom: 5px;
   display: flex;
   flex-direction: column;
@@ -40,6 +40,8 @@ input.input {
 
 input.input:focus {
   outline: none;
+  border-color: var(--green);
+  background: var(--yellow);
 }
 
 input.active:not(:focus):invalid {
@@ -79,7 +81,9 @@ input.active:not(:focus):invalid + span.errorMessage {
   color: var(--black);
 }
 
-.button:hover {
+.button:hover,
+.button:focus {
+  outline: none;
   background: var(--yellow);
   color: var(--green);
 }
