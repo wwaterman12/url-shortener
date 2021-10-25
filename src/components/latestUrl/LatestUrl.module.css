@@ -1,0 +1,17 @@
+.latestUrlWrapper {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.subText {
+  font-size: 14px;
+}
+
+.underline {
+  display: block;
+  margin-bottom: 5px;
+  text-decoration: underline;
+}
+.yellow {
+  color: var(--yellow);
+}
