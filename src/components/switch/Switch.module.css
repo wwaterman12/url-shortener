@@ -2,11 +2,10 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: 30px;
+  height: 25px;
   border-radius: 100px;
   background-color: var(--gray);
-  padding: 1px;
-  font-size: 12px;
+  font-size: 10px;
 }
 
 .blob {
