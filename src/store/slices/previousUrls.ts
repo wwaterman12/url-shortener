@@ -20,6 +20,14 @@ export const fetchPreviousUrls = createAsyncThunk(
   }
 );
 
+export const deletePreviousUrl = createAsyncThunk(
+  "previousUrls/deletePreviousUrl",
+  async (slug: string) => {
+    await API.deletePreviousUrl(slug);
+    return slug;
+  }
+);
+
 export const previousUrlsSlice = createSlice({
   name: "previousUrls",
   initialState,
@@ -29,13 +37,23 @@ export const previousUrlsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchPreviousUrls.fulfilled, (state, action) => {
-      state.previousUrlsList = action.payload;
-    });
+    builder
+      .addCase(fetchPreviousUrls.fulfilled, (state, action) => {
+        state.previousUrlsList = action.payload;
+      })
+      .addCase(deletePreviousUrl.fulfilled, (state, action) => {
+        state.previousUrlsList = state.previousUrlsList.filter(
+          (url) => url.slug !== action.payload
+        );
+      });
   },
 });
 
+export const { addUrl } = previousUrlsSlice.actions;
+
 export const selectPreviousUrls = (state: RootState) =>
   state.previousUrls.previousUrlsList;
+export const selectPreviousUrlSlugs = (state: RootState) =>
+  state.previousUrls.previousUrlsList.map((url) => url.slug);
 
 export default previousUrlsSlice.reducer;

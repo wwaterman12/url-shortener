@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { ShortenedUrl, VisibleUrlType } from "../../lib/interfaces";
+import { useDispatch } from "../../store/hooks";
+import { deletePreviousUrl } from "../../store/slices/previousUrls";
 import styles from "./UrlsList.module.css";
 
 /**
@@ -10,6 +12,7 @@ import styles from "./UrlsList.module.css";
 function UrlsList(props: Props) {
   const [clipBoardText, setClipBoardText] = useState("");
   const [deleted, setIsDeleted] = useState<string[]>([]);
+  const dispatch = useDispatch();
 
   const isClipBoardText = (text: string) => text === clipBoardText;
   const copyToClipBoard = (text: string) => {
@@ -20,6 +23,7 @@ function UrlsList(props: Props) {
   const isDeleted = (slug: string) => deleted.includes(slug);
   const deleteUrl = async (url: ShortenedUrl) => {
     setIsDeleted((prevDeleted) => [url.slug, ...prevDeleted]);
+    await dispatch(deletePreviousUrl(url.slug));
   };
 
   return (

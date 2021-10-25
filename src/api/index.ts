@@ -35,5 +35,13 @@ async function fetchPreviousUrls(): Promise<ShortenedUrl[]> {
   return responseData.map((data: APIResponseFormat) => cleanData(data));
 }
 
-const API = { postNewUrl, fetchPreviousUrls };
+async function deletePreviousUrl(slug: string): Promise<void> {
+  await fetch(`${API_URL}/${slug}`, {
+    method: "DELETE",
+    mode,
+    headers,
+  });
+}
+
+const API = { postNewUrl, fetchPreviousUrls, deletePreviousUrl };
 export default API;
