@@ -5,7 +5,7 @@ import { selectPreviousUrls } from "../../store/slices/previousUrls";
 import LatestUrl from "../latestUrl";
 import UrlsList from "../urlsList";
 import Switch from "../switch";
-import arrowLeft from "../../assets/arrowLeft.svg";
+import arrow from "../../assets/arrow.svg";
 import styles from "./Result.module.css";
 
 function Result({ toggleActiveView }: Props) {
@@ -16,8 +16,8 @@ function Result({ toggleActiveView }: Props) {
   return (
     <div>
       <span className={styles.backLink} onClick={toggleActiveView}>
-        <img src={arrowLeft} alt="arrow left" />
-        BACK
+        <img src={arrow} alt="arrow left" />
+        &nbsp;BACK
       </span>
       <LatestUrl />
       <h2>Previous URLs</h2>

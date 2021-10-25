@@ -21,6 +21,20 @@
   z-index: -1;
 }
 
+.skipLink {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.skipLink img {
+  height: 16px;
+  transform: rotate(180deg);
+}
+
 @media screen and (max-width: 400px) {
   .views {
     padding: 10px;

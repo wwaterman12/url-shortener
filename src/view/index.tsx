@@ -5,6 +5,7 @@ import { ActiveView } from "../lib/interfaces";
 import Form from "../components/form";
 import Header from "../components/header";
 import Result from "../components/result";
+import arrow from "../assets/arrow.svg";
 import styles from "./View.module.css";
 
 function View() {
@@ -24,6 +25,13 @@ function View() {
       >
         <Header />
         <Form toggleActiveView={() => setActiveView("result")} />
+        <span
+          className={styles.skipLink}
+          onClick={() => setActiveView("result")}
+        >
+          SKIP&nbsp;
+          <img src={arrow} alt="arrow right" />
+        </span>
       </div>
       <div
         className={`${styles.view} ${
