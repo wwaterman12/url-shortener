@@ -6,7 +6,7 @@
 
 .navLink.rightLink {
   margin: 20px;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
 }
 
