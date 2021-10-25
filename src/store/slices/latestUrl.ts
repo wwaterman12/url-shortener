@@ -32,7 +32,13 @@ export const postNewUrl = createAsyncThunk(
 export const latestUrlSlice = createSlice({
   name: "latestUrl",
   initialState,
-  reducers: {},
+  reducers: {
+    resetLatestUrl: (state) => {
+      state.shortUrl = "";
+      state.fullUrl = "";
+      state.slug = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(postNewUrl.pending, (state) => {
@@ -47,6 +53,8 @@ export const latestUrlSlice = createSlice({
       });
   },
 });
+
+export const { resetLatestUrl } = latestUrlSlice.actions;
 
 export const selectStatus = (state: RootState) => state.latestUrl.status;
 export const selectLatestUrl = (state: RootState) => ({

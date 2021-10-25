@@ -1,6 +1,14 @@
-import React, { FormEvent, useState } from "react";
-import { useDispatch } from "../../store/hooks";
-import { postNewUrl } from "../../store/slices/latestUrl";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "../../store/hooks";
+import {
+  postNewUrl,
+  resetLatestUrl,
+  selectLatestUrl,
+} from "../../store/slices/latestUrl";
+import {
+  addUrl,
+  selectPreviousUrlSlugs,
+} from "../../store/slices/previousUrls";
 import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
 import styles from "./Form.module.css";
@@ -9,14 +17,17 @@ function Form() {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
   const dispatch = useDispatch();
+  const latestUrl = useSelector(selectLatestUrl);
+  const previousUrlSlugs = useSelector(selectPreviousUrlSlugs);
 
   const autoFillCurrentPageUrl = (e: FormEvent) => {
     e.preventDefault();
     setUrl(window.location.href);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    dispatch(resetLatestUrl());
     const params: PostParams = { url };
     // only set slug param if valid, API doesn't accept empty string
     if (slug) {
@@ -24,6 +35,12 @@ function Form() {
     }
     dispatch(postNewUrl(params));
   };
+
+  useEffect(() => {
+    if (!!latestUrl.slug && !previousUrlSlugs.includes(latestUrl.slug)) {
+      dispatch(addUrl(latestUrl));
+    }
+  }, [dispatch, previousUrlSlugs, latestUrl]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
