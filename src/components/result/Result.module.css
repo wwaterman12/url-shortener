@@ -1,0 +1,9 @@
+.backLink {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.backLink img {
+  height: 16px;
+}

@@ -16,3 +16,5 @@ export interface APIResponseFormat {
 }
 
 export type VisibleUrlType = "shortUrl" | "fullUrl";
+
+export type ActiveView = "form" | "result";

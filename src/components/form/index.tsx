@@ -13,7 +13,7 @@ import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
 import styles from "./Form.module.css";
 
-function Form() {
+function Form({ toggleActiveView }: Props) {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
   const dispatch = useDispatch();
@@ -39,8 +39,9 @@ function Form() {
   useEffect(() => {
     if (!!latestUrl.slug && !previousUrlSlugs.includes(latestUrl.slug)) {
       dispatch(addUrl(latestUrl));
+      toggleActiveView();
     }
-  }, [dispatch, previousUrlSlugs, latestUrl]);
+  }, [dispatch, previousUrlSlugs, latestUrl, toggleActiveView]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -97,6 +98,10 @@ function Form() {
       </div>
     </form>
   );
+}
+
+interface Props {
+  toggleActiveView: () => void;
 }
 
 export default Form;
