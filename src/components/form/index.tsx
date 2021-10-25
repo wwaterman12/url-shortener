@@ -63,7 +63,7 @@ function Form() {
         </span>
       </label>
       <label className={styles.inputWrapper}>
-        <span>{`Enter a custom slug\n(optional)`}</span>
+        <span>{`(Optional) Enter a custom slug`}</span>
         <input
           className={`${styles.input} ${slug ? styles.active : ""}`}
           type="text"
@@ -75,8 +75,7 @@ function Form() {
           onChange={(e) => setSlug(e.target.value)}
         />
         <span className={styles.errorMessage}>
-          <img src={alert} alt="alert" /> Slugs may only contain letters and
-          numbers
+          <img src={alert} alt="alert" /> Must be alpha-numeric characters
         </span>
       </label>
       <div className={styles.buttonWrapper}>
