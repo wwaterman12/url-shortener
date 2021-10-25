@@ -1,0 +1,24 @@
+.navLink {
+  display: flex;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.navLink.rightLink {
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.navLink img {
+  display: none;
+  height: 16px;
+}
+
+.navLink img.active {
+  display: inline-block;
+}
+
+.navLink img.right {
+  transform: rotate(180deg);
+}
