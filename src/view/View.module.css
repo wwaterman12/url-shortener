@@ -6,8 +6,8 @@
   color: var(--green);
 }
 
-.logo {
-  padding: 10px;
-  border: 1px solid var(--green);
-  border-radius: 8px;
+@media screen and (max-width: 400px) {
+  .view {
+    padding: 10px;
+  }
 }
