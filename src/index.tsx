@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import View from "./view";
+import Views from "./views";
 import { store } from "./store";
 import { Provider } from "react-redux";
 import * as serviceWorker from "./serviceWorker";
@@ -9,7 +9,7 @@ import "./index.css";
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <View />
+      <Views />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

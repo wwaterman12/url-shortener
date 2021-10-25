@@ -1,0 +1,14 @@
+.views {
+  margin: auto;
+  position: relative;
+  height: 100vh;
+  padding: 20px;
+  background: var(--black);
+  color: var(--green);
+}
+
+@media screen and (max-width: 400px) {
+  .views {
+    padding: 10px;
+  }
+}

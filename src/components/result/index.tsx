@@ -5,20 +5,21 @@ import { selectPreviousUrls } from "../../store/slices/previousUrls";
 import LatestUrl from "../latestUrl";
 import UrlsList from "../urlsList";
 import Switch from "../switch";
-import arrow from "../../assets/arrow.svg";
-import styles from "./Result.module.css";
+import NavLink from "../navLink";
 
-function Result({ toggleActiveView }: Props) {
+/**
+ * @param {string} activeView - can be "form" or "result"
+ * @param {() => void} toggleActiveView - on NavLink click event handler
+ */
+
+function Result({ toggleActiveView, activeView }: Props) {
   const [visibleUrlType, setVisibleUrlType] =
     useState<VisibleUrlType>("shortUrl");
   const previousUrlsList = useSelector(selectPreviousUrls);
 
   return (
     <div>
-      <span className={styles.backLink} onClick={toggleActiveView}>
-        <img src={arrow} alt="arrow left" />
-        &nbsp;BACK
-      </span>
+      <NavLink toggleActiveView={toggleActiveView} activeView={activeView} />
       <LatestUrl />
       <h2>Previous URLs</h2>
       <Switch
@@ -35,6 +36,7 @@ function Result({ toggleActiveView }: Props) {
 }
 
 interface Props {
+  activeView: "form" | "result";
   toggleActiveView: () => void;
 }
 

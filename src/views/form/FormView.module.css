@@ -1,0 +1,13 @@
+.view {
+  transition: opacity 1s;
+  max-width: calc(100vw - 20px);
+  width: 400px;
+  margin: auto;
+}
+
+.view.result {
+  position: absolute;
+  top: 10px;
+  opacity: 0;
+  z-index: -1;
+}
