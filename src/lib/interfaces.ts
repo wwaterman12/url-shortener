@@ -14,3 +14,5 @@ export interface APIResponseFormat {
   short_url: string;
   slug: string;
 }
+
+export type VisibleUrlType = "shortUrl" | "fullUrl";

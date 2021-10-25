@@ -1,4 +1,5 @@
 import React from "react";
+import { VisibleUrlType } from "../../lib/interfaces";
 import styles from "./Switch.module.css";
 
 /**
@@ -12,7 +13,7 @@ function Switch(props: Props) {
   const right = () => props.options[1];
   const isRight = () => props.activeValue === props.options[1].value;
 
-  const toggle = (value: string) => {
+  const toggle = (value: VisibleUrlType) => {
     if (value === props.activeValue) return;
     props.toggleValue(value);
   };
@@ -42,13 +43,13 @@ function Switch(props: Props) {
 
 interface Option {
   label: string;
-  value: string;
+  value: VisibleUrlType;
 }
 
 interface Props {
   activeValue: string;
   options: [Option, Option];
-  toggleValue: (val: string) => void;
+  toggleValue: (val: VisibleUrlType) => void;
 }
 
 export default Switch;
