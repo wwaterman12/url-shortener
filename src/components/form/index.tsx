@@ -1,30 +1,47 @@
-import React, { FormEvent, useState } from "react";
-import { useDispatch } from "../../store/hooks";
-import { postNewLink } from "../../store/slices/latestUrl";
+import React, { FormEvent, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "../../store/hooks";
+import {
+  postNewUrl,
+  resetLatestUrl,
+  selectLatestUrl,
+} from "../../store/slices/latestUrl";
+import {
+  addUrl,
+  selectPreviousUrlSlugs,
+} from "../../store/slices/previousUrls";
 import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
-import { delay } from "../../lib/utils";
 import styles from "./Form.module.css";
 
-function Form() {
+function Form({ toggleActiveView }: Props) {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
   const dispatch = useDispatch();
+  const latestUrl = useSelector(selectLatestUrl);
+  const previousUrlSlugs = useSelector(selectPreviousUrlSlugs);
 
   const autoFillCurrentPageUrl = (e: FormEvent) => {
     e.preventDefault();
     setUrl(window.location.href);
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    dispatch(resetLatestUrl());
     const params: PostParams = { url };
     // only set slug param if valid, API doesn't accept empty string
     if (slug) {
       params.slug = slug;
     }
-    await Promise.all([dispatch(postNewLink(params)), delay(2000)]);
+    dispatch(postNewUrl(params));
   };
+
+  useEffect(() => {
+    if (!!latestUrl.slug && !previousUrlSlugs.includes(latestUrl.slug)) {
+      dispatch(addUrl(latestUrl));
+      toggleActiveView();
+    }
+  }, [dispatch, previousUrlSlugs, latestUrl, toggleActiveView]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -47,7 +64,7 @@ function Form() {
         </span>
       </label>
       <label className={styles.inputWrapper}>
-        <span>{`Enter a custom slug\n(optional)`}</span>
+        <span>{`(Optional) Enter a custom slug`}</span>
         <input
           className={`${styles.input} ${slug ? styles.active : ""}`}
           type="text"
@@ -59,8 +76,7 @@ function Form() {
           onChange={(e) => setSlug(e.target.value)}
         />
         <span className={styles.errorMessage}>
-          <img src={alert} alt="alert" /> Slugs may only contain letters and
-          numbers
+          <img src={alert} alt="alert" /> Must be alpha-numeric characters
         </span>
       </label>
       <div className={styles.buttonWrapper}>
@@ -82,6 +98,10 @@ function Form() {
       </div>
     </form>
   );
+}
+
+interface Props {
+  toggleActiveView: () => void;
 }
 
 export default Form;

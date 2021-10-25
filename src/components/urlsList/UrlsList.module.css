@@ -1,0 +1,50 @@
+.listWrapper {
+  max-height: 300px;
+  margin: 10px 0;
+  padding: 0;
+  overflow: scroll;
+  list-style: none;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--green);
+  transition: height 0.5s, padding 0.5s;
+  font-size: 10px;
+}
+
+.listItem.deleted {
+  height: 0;
+  padding: 0;
+  border: none;
+  visibility: hidden;
+}
+
+.button {
+  font-size: 10px;
+  min-width: 50px;
+  min-height: 16px;
+  border-radius: 40px;
+  cursor: pointer;
+  color: var(--black);
+  border: none;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+.copy {
+  margin-right: 10px;
+  background: var(--yellow);
+}
+
+.copy.copied {
+  background: var(--green);
+  color: var(--yellow);
+}
+
+.delete {
+  background: var(--red);
+}

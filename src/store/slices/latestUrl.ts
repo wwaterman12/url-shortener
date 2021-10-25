@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { PostParams } from "../../lib/interfaces";
+import { delay } from "../../lib/utils";
 import API from "../../api";
 
 export interface LatestUrlState {
@@ -17,24 +18,33 @@ const initialState: LatestUrlState = {
   status: "idle",
 };
 
-export const postNewLink = createAsyncThunk(
-  "counter/fetchCount",
-  async (postParams: PostParams) => {
-    const response = await API.postNewLink(postParams);
-    return response;
+export const postNewUrl = createAsyncThunk(
+  "latestUrl/postNewUrl",
+  async (postParams: PostParams, { rejectWithValue }) => {
+    const response = await Promise.all([
+      API.postNewUrl(postParams),
+      delay(2000),
+    ]);
+    return response[0];
   }
 );
 
 export const latestUrlSlice = createSlice({
   name: "latestUrl",
   initialState,
-  reducers: {},
+  reducers: {
+    resetLatestUrl: (state) => {
+      state.shortUrl = "";
+      state.fullUrl = "";
+      state.slug = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
-      .addCase(postNewLink.pending, (state) => {
+      .addCase(postNewUrl.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(postNewLink.fulfilled, (state, action) => {
+      .addCase(postNewUrl.fulfilled, (state, action) => {
         const { shortUrl, fullUrl, slug } = action.payload;
         state.status = "idle";
         state.shortUrl = shortUrl;
@@ -43,6 +53,8 @@ export const latestUrlSlice = createSlice({
       });
   },
 });
+
+export const { resetLatestUrl } = latestUrlSlice.actions;
 
 export const selectStatus = (state: RootState) => state.latestUrl.status;
 export const selectLatestUrl = (state: RootState) => ({

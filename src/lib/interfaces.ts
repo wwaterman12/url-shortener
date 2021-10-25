@@ -3,8 +3,18 @@ export interface PostParams {
   slug?: string;
 }
 
-export interface PostResponse {
+export interface ShortenedUrl {
   fullUrl: string;
   shortUrl: string;
   slug: string;
 }
+
+export interface APIResponseFormat {
+  url: string;
+  short_url: string;
+  slug: string;
+}
+
+export type VisibleUrlType = "shortUrl" | "fullUrl";
+
+export type ActiveView = "form" | "result";
