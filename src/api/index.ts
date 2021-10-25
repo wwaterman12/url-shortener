@@ -1,10 +1,10 @@
-import { API_URL } from "../lib/constants";
+import { API_URL, API_ACCESS_TOKEN } from "../lib/constants";
 import { APIResponseFormat, PostParams, ShortenedUrl } from "../lib/interfaces";
 
 // default values
 const headers = {
   "Content-Type": "application/json",
-  "GB-Access-Token": "95b583f22efb9a03314b2764584efc44",
+  "GB-Access-Token": API_ACCESS_TOKEN,
 };
 const mode = "cors";
 
