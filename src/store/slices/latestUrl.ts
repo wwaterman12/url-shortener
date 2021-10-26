@@ -9,6 +9,7 @@ export interface LatestUrlState {
   slug: string;
   fullUrl: string;
   status: "idle" | "loading" | "failed";
+  errorMessage: string;
 }
 
 const initialState: LatestUrlState = {
@@ -16,11 +17,12 @@ const initialState: LatestUrlState = {
   slug: "",
   fullUrl: "",
   status: "idle",
+  errorMessage: "",
 };
 
 export const postNewUrl = createAsyncThunk(
   "latestUrl/postNewUrl",
-  async (postParams: PostParams, { rejectWithValue }) => {
+  async (postParams: PostParams) => {
     const response = await Promise.all([
       API.postNewUrl(postParams),
       delay(2000),
@@ -50,6 +52,10 @@ export const latestUrlSlice = createSlice({
         state.shortUrl = shortUrl;
         state.fullUrl = fullUrl;
         state.slug = slug;
+      })
+      .addCase(postNewUrl.rejected, (state, action) => {
+        state.status = "failed";
+        state.errorMessage = action.error.message || "";
       });
   },
 });
