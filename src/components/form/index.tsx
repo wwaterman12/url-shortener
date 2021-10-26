@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "../../store/hooks";
 import {
   postNewUrl,
   resetLatestUrl,
+  selectErrorMessage,
   selectLatestUrl,
+  selectStatus,
 } from "../../store/slices/latestUrl";
 import {
   addUrl,
@@ -22,6 +24,8 @@ function Form({ toggleActiveView }: Props) {
   const dispatch = useDispatch();
   const latestUrl = useSelector(selectLatestUrl);
   const previousUrlSlugs = useSelector(selectPreviousUrlSlugs);
+  const status = useSelector(selectStatus);
+  const errorMessage = useSelector(selectErrorMessage);
 
   const autoFillCurrentPageUrl = (e: FormEvent) => {
     e.preventDefault();
@@ -48,6 +52,12 @@ function Form({ toggleActiveView }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      {status === "failed" && (
+        <span className={styles.formError}>
+          <img src={alert} alt="alert" />
+          &nbsp;{errorMessage}
+        </span>
+      )}
       <label className={styles.inputWrapper}>
         <span>Enter a URL</span>
         <input

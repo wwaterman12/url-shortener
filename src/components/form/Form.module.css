@@ -32,6 +32,19 @@ input.input {
   color: var(--red);
 }
 
+.formError {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin: 10px 0;
+  color: var(--red);
+}
+
+.formError img {
+  vertical-align: bottom;
+  width: 18px;
+}
+
 .errorMessage img {
   vertical-align: bottom;
   width: 14px;

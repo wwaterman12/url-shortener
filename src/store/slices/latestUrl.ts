@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { PostParams } from "../../lib/interfaces";
-import { delay } from "../../lib/utils";
 import API from "../../api";
 
 export interface LatestUrlState {
@@ -23,11 +22,8 @@ const initialState: LatestUrlState = {
 export const postNewUrl = createAsyncThunk(
   "latestUrl/postNewUrl",
   async (postParams: PostParams) => {
-    const response = await Promise.all([
-      API.postNewUrl(postParams),
-      delay(2000),
-    ]);
-    return response[0];
+    const response = await API.postNewUrl(postParams);
+    return response;
   }
 );
 
@@ -39,6 +35,10 @@ export const latestUrlSlice = createSlice({
       state.shortUrl = "";
       state.fullUrl = "";
       state.slug = "";
+    },
+    resetStatus: (state) => {
+      state.status = "idle";
+      state.errorMessage = "";
     },
   },
   extraReducers: (builder) => {
@@ -53,16 +53,18 @@ export const latestUrlSlice = createSlice({
         state.fullUrl = fullUrl;
         state.slug = slug;
       })
-      .addCase(postNewUrl.rejected, (state, action) => {
+      .addCase(postNewUrl.rejected, (state) => {
+        state.errorMessage = "This URL has already been shortened";
         state.status = "failed";
-        state.errorMessage = action.error.message || "";
       });
   },
 });
 
-export const { resetLatestUrl } = latestUrlSlice.actions;
+export const { resetLatestUrl, resetStatus } = latestUrlSlice.actions;
 
 export const selectStatus = (state: RootState) => state.latestUrl.status;
+export const selectErrorMessage = (state: RootState) =>
+  state.latestUrl.errorMessage;
 export const selectLatestUrl = (state: RootState) => ({
   fullUrl: state.latestUrl.fullUrl,
   shortUrl: state.latestUrl.shortUrl,

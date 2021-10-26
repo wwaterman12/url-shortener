@@ -22,6 +22,7 @@ async function postNewUrl({ url, slug }: PostParams): Promise<ShortenedUrl> {
     body: JSON.stringify({ url, slug }),
   });
   const data = await response.json();
+  if (response.status === 422) throw data.errors; // URL already taken
   return cleanData(data);
 }
 
