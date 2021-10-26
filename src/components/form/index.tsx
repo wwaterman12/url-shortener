@@ -13,6 +13,9 @@ import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
 import styles from "./Form.module.css";
 
+/**
+ * @param {() => void} toggleActiveView - emitted function after form submit success
+ */
 function Form({ toggleActiveView }: Props) {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
