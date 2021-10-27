@@ -46,7 +46,9 @@ $ npm run test
 
 - For more info on what testing frameworks create react app uses, please see [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-### Next Steps
+### Next Steps/future improvements
 
 - The API used in this project does not serve valid https URLs. So, I will build a simple node API that serves valid URLs by storing full URLs in [MongoDB](https://www.mongodb.com/)
+  - this will also involve creating multiple users via unique API keys and storing these as keys in noSQL
 - This application would be better suited as a chrome extension. So, I will also deploy this as a chrome extension that can autofill with the active tab's window.location.href
+- Create React App doesn't allow path aliases. This is annoying because it's difficult to track deeply nest relative paths. So, I will run `npm eject` to get access to the webpack configuration and include path aliases
