@@ -1,44 +1,52 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
+# URL Shortener
 
-## Available Scripts
+|                                                      Form                                                       |                                                     Result                                                      |
+| :-------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------: |
+| ![image](https://user-images.githubusercontent.com/16707111/138994039-e3540b55-90c5-4694-b8ca-d87ea967183d.png) | ![image](https://user-images.githubusercontent.com/16707111/138994122-468f071f-50e6-4f53-891e-e7ce82a7d60d.png) |
 
-In the project directory, you can run:
+## Description
 
-### `npm start`
+- This is a simple URL Shortener client. It allows users to enter a URL, optionally enter a custom slug, and then receive a shortened URL that redirects to that page. Users can also see all previous URLs they have shortened, copy these to the clipboard, or invalidate/delete old URLs.
+- Commits use [Gitmoji](https://gitmoji.dev/) to specify what type of changes they make
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Dependencies
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [Create React App](https://create-react-app.dev/)
+- [Redux](https://react-redux.js.org/)
+- [Typescript](https://www.typescriptlang.org/)
 
-### `npm test`
+## Notes before installation
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- This project was developed using node version 16.7.0 and npm version 7.21.0. For best results, please use these versions when installing locally
+- [create-react-app](https://create-react-app.dev/) uses an npm version below 7 under the hood in it's startup sequence. Npm has [breaking changes betwen versions 6 and 7](https://docs.npmjs.com/cli/v7/configuring-npm/package-lock-json). This app has not been tested with versions of npm below 7.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. after cloning the repository into your local via ssh or https, install npm packages
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+```sh
+$ npm install
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. start a server locally
 
-### `npm run eject`
+```sh
+$ npm run start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Navigate to [http://localhost:3000](http://localhost:3000) in your browser of choice if the page has not automatically opened
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Tests
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- Tests suits can be run via
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```sh
+$ npm run test
+```
 
-## Learn More
+- For more info on what testing frameworks create react app uses, please see [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Next Steps
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- The API used in this project does not serve valid https URLs. So, I will build a simple node API that serves valid URLs by storing full URLs in [MongoDB](https://www.mongodb.com/)
+- This application would be better suited as a chrome extension. So, I will also deploy this as a chrome extension that can autofill with the active tab's window.location.href
