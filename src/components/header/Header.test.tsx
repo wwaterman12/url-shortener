@@ -1,15 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { store } from "../store";
-import View from "./index";
+import Header from "./index";
 
 test("renders title correctly", () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <View />
-    </Provider>
-  );
+  const { getByText } = render(<Header />);
 
   expect(
     getByText(/A simple, but handy tool for shortening URLs/i)

@@ -64,6 +64,7 @@ function Form({ toggleActiveView }: Props) {
           className={`${styles.input} ${url ? styles.active : ""}`}
           type="url"
           name="url"
+          aria-label="enter-url"
           id="url"
           value={url}
           placeholder="https://example.com"
@@ -82,6 +83,7 @@ function Form({ toggleActiveView }: Props) {
           className={`${styles.input} ${slug ? styles.active : ""}`}
           type="text"
           name="slug"
+          aria-label="enter-slug"
           id="slug"
           value={slug}
           placeholder="vbfsa2"
