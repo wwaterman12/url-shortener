@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { ShortenedUrl } from "../../lib/interfaces";
-import { delay } from "../../lib/utils";
 import API from "../../api";
 
 export interface PreviousUrlsState {
@@ -15,8 +14,8 @@ const initialState: PreviousUrlsState = {
 export const fetchPreviousUrls = createAsyncThunk(
   "previousUrls/fetchPreviousUrls",
   async () => {
-    const response = await Promise.all([API.fetchPreviousUrls(), delay(2000)]);
-    return response[0];
+    const response = await API.fetchPreviousUrls();
+    return response;
   }
 );
 

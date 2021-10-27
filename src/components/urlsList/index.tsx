@@ -21,9 +21,9 @@ function UrlsList(props: Props) {
   };
 
   const isDeleted = (slug: string) => deleted.includes(slug);
-  const deleteUrl = async (url: ShortenedUrl) => {
+  const deleteUrl = (url: ShortenedUrl) => {
     setIsDeleted((prevDeleted) => [url.slug, ...prevDeleted]);
-    await dispatch(deletePreviousUrl(url.slug));
+    dispatch(deletePreviousUrl(url.slug));
   };
 
   return (

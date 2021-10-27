@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from "../../store/hooks";
 import {
   postNewUrl,
   resetLatestUrl,
+  selectErrorMessage,
   selectLatestUrl,
+  selectStatus,
 } from "../../store/slices/latestUrl";
 import {
   addUrl,
@@ -13,12 +15,17 @@ import { PostParams } from "../../lib/interfaces";
 import alert from "../../assets/alert.svg";
 import styles from "./Form.module.css";
 
+/**
+ * @param {() => void} toggleActiveView - emitted function after form submit success
+ */
 function Form({ toggleActiveView }: Props) {
   const [url, setUrl] = useState("");
   const [slug, setSlug] = useState("");
   const dispatch = useDispatch();
   const latestUrl = useSelector(selectLatestUrl);
   const previousUrlSlugs = useSelector(selectPreviousUrlSlugs);
+  const status = useSelector(selectStatus);
+  const errorMessage = useSelector(selectErrorMessage);
 
   const autoFillCurrentPageUrl = (e: FormEvent) => {
     e.preventDefault();
@@ -45,12 +52,19 @@ function Form({ toggleActiveView }: Props) {
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      {status === "failed" && (
+        <span className={styles.formError}>
+          <img src={alert} alt="alert" />
+          &nbsp;{errorMessage}
+        </span>
+      )}
       <label className={styles.inputWrapper}>
         <span>Enter a URL</span>
         <input
           className={`${styles.input} ${url ? styles.active : ""}`}
           type="url"
           name="url"
+          aria-label="enter-url"
           id="url"
           value={url}
           placeholder="https://example.com"
@@ -69,6 +83,7 @@ function Form({ toggleActiveView }: Props) {
           className={`${styles.input} ${slug ? styles.active : ""}`}
           type="text"
           name="slug"
+          aria-label="enter-slug"
           id="slug"
           value={slug}
           placeholder="vbfsa2"
